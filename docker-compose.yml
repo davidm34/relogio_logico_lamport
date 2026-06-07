@@ -1,0 +1,81 @@
+services:
+  # Processo Juiz - recebe eventos de todos e valida apostas
+  judge:
+    build:
+      context: .
+      args:
+        SERVICE_NAME: judge
+    container_name: lamport-judge
+    ports:
+      - "5000:5000"
+    networks:
+      - race-network
+    restart: "no"
+
+  # Cavalo 1
+  horse1:
+    build:
+      context: .
+      args:
+        SERVICE_NAME: horse
+    container_name: lamport-horse1
+    environment:
+      - HORSE_NAME=cavalo1
+      - JUDGE_ADDR=judge:5000
+    depends_on:
+      - judge
+    networks:
+      - race-network
+    restart: "no"
+
+  # Cavalo 2
+  horse2:
+    build:
+      context: .
+      args:
+        SERVICE_NAME: horse
+    container_name: lamport-horse2
+    environment:
+      - HORSE_NAME=cavalo2
+      - JUDGE_ADDR=judge:5000
+    depends_on:
+      - judge
+    networks:
+      - race-network
+    restart: "no"
+
+  # Cavalo 3
+  horse3:
+    build:
+      context: .
+      args:
+        SERVICE_NAME: horse
+    container_name: lamport-horse3
+    environment:
+      - HORSE_NAME=cavalo3
+      - JUDGE_ADDR=judge:5000
+    depends_on:
+      - judge
+    networks:
+      - race-network
+    restart: "no"
+
+  # Apostador
+  bettor:
+    build:
+      context: .
+      args:
+        SERVICE_NAME: bettor
+    container_name: lamport-bettor
+    environment:
+      - BETTOR_NAME=apostador
+      - JUDGE_ADDR=judge:5000
+    depends_on:
+      - judge
+    networks:
+      - race-network
+    restart: "no"
+
+networks:
+  race-network:
+    driver: bridge

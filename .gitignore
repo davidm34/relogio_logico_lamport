@@ -1,0 +1,41 @@
+# Binários Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Binários compilados
+/bin/
+/build/
+/dist/
+
+# Arquivos de teste
+*.test
+*.out
+*.prof
+
+# Dependências Go
+/vendor/
+
+# Variáveis de ambiente (sensíveis)
+.env
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Docker
+.docker/
+
+# Logs
+*.log
+
+# Arquivos temporários
+tmp/
+temp/
